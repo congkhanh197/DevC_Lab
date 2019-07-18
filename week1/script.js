@@ -1,9 +1,6 @@
 function convertToVnd() {
-    callApi('USD');
-    let conversion = 23262;
-    let vndAmount = 50;
-    let result = document.getElementById('result');
-    result.innerHTML = vndAmount
+    let currencyType = document.querySelector('input[name="currency"]:checked').value;
+    callApi(currencyType);
 }
 function callApi(currency) {
     var xhr = new XMLHttpRequest();
@@ -20,5 +17,11 @@ function callApi(currency) {
 }
   
 function updateResults(response) {
-    console.log(response['USD_VND']);
+    // console.log();
+    let currencyType = document.querySelector('input[name="currency"]:checked').value;
+    let conversion = Object.values(response)[0];
+    let amount = document.getElementById("amount").value;
+    let vndAmount = amount*conversion;
+    let result = document.getElementById('result');
+    result.innerHTML = amount+" "+currencyType +" is "+ vndAmount + " VND"
 }
